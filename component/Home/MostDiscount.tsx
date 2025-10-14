@@ -1,8 +1,10 @@
+'use client'
+
 import React from 'react';
 import SwiperWrapper from "@/component/SwiperWrapper";
 import {productService} from "@/services/productService";
 
-export default async function MostDiscount() {
+export async function MostDiscount() {
     const productsData = await productService.getAll({sort: "mostDiscount"})
     const products = productsData.data;
 
