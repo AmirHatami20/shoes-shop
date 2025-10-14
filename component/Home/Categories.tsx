@@ -15,7 +15,7 @@ export default function Categories() {
                 <motion.div
                     key={cat.id}
                     variants={{
-                        hidden: {opacity: 0, x: -100, y: 0}, // come from left
+                        hidden: {opacity: 0, x: -100, y: 0},
                         show: {opacity: 1, x: 0, y: 0, transition: {duration: 0.5, ease: "easeOut"}},
                     }}
                 >
