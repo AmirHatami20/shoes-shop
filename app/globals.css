@@ -1,0 +1,141 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+    --color-background: #f4f4f5;
+    --color-background-secondary: #ffffff;
+    --color-text: #000000;
+    --color-text-muted: #6b6b6b;
+    --color-primary: #CC0000;
+    --color-primary-dark: #941618;
+    --color-border: #c5c4c4;
+}
+
+html.dark {
+    --color-background: #09090b;
+    --color-background-secondary: #262424;
+    --color-text: #ffffff;
+    --color-text-muted: #B3B3B3;
+    --color-primary: #CC0000;
+    --color-primary-dark: #941618;
+    --color-border: #414c5d;
+}
+
+@theme {
+    --color-background: var(--color-background);
+    --color-background-secondary: var(--color-background-secondary);
+    --color-text: var(--color-text);
+    --color-text-muted: var(--color-text-muted);
+    --color-primary: var(--color-primary);
+    --color-primary-dark: var(--color-primary-dark);
+    --color-border: var(--color-border);
+}
+
+@layer utilities {
+    .container {
+        margin-inline: auto;
+        position: relative;
+        width: 90% !important;
+
+        @variant sm {
+            max-width: 640px;
+        }
+        @variant md {
+            max-width: 768px;
+        }
+        @variant lg {
+            max-width: 1024px;
+        }
+        @variant xl {
+            max-width: 1280px !important;
+        }
+    }
+
+    .primary-button {
+        @apply flex items-center justify-center gap-x-2 bg-primary hover:bg-primary-dark text-white rounded font-semibold p-2 transition-colors duration-300 shrink-0;
+    }
+
+    .secondary-button {
+        @apply flex items-center justify-center p-2 rounded-lg gap-x-2 text-primary border-2 border-primary shrink-0 transition hover:bg-primary/25;
+    }
+
+    .primary-button-pending {
+        @apply flex items-center justify-center gap-x-2 bg-gray-400 cursor-not-allowed text-white font-semibold p-2 rounded;
+    }
+
+    .header-button {
+        @apply flex items-center justify-center size-12 my-2 rounded-full bg-background hover:bg-primary border border-border transition text-2xl;
+    }
+
+    .header-menu__item {
+        @apply w-full flex items-center gap-x-2.5 px-2.5 py-2.5 rounded-md text-[22px] hover:text-white transition-colors;
+    }
+
+    .admin-section {
+        @apply bg-background-secondary rounded-lg p-5;
+    }
+
+    .admin-section__header {
+        @apply flex items-center justify-between mb-4;
+    }
+
+    .admin-section__title {
+        @apply text-xl font-bold;
+    }
+
+    .admin-input {
+        @apply w-full h-full rounded-lg border border-border bg-background text-sm px-3 py-2 placeholder-text-muted ;
+    }
+
+    .admin-delete-btn {
+        @apply flex items-center justify-center rounded-full w-9 h-9  shrink-0 border-2 hover:bg-background-secondary border-border text-primary;
+    }
+
+    .auth-input {
+        @apply w-full border border-border rounded p-2;
+    }
+
+    .swiper-button {
+        @apply absolute my-auto flex items-center justify-center w-8 h-8 rounded-full text-primary border border-primary
+    }
+
+    .bread-crumb-item {
+        @apply flex items-center shrink-0 p-2 md:p-3;
+    }
+
+    .swiper-pagination-bullet {
+        @apply bg-gray-400 opacity-60 w-2.5 h-2.5 rounded-full transition-all;
+    }
+
+    .swiper-pagination-bullet-active {
+        @apply !bg-primary opacity-100 scale-125;
+    }
+
+}
+
+@layer base {
+    button {
+        cursor: pointer;
+    }
+}
+
+/* Custom Scrollbar Style */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #CC0000;
+    border-radius: 9999px;
+    border: 2px solid var(--color-background-secondary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #941618;
+}
