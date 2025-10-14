@@ -10,7 +10,7 @@ import {motion} from "framer-motion";
 export default function Categories() {
 
     return (
-        <MotionWrapper className="container grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-5" stagger={0.1} trigger="always">
+        <MotionWrapper className="container grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 my-5" stagger={0.1}>
             {CATEGORIES_DATA.map(cat => (
                 <motion.div
                     key={cat.id}

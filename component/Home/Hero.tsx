@@ -10,7 +10,6 @@ export default function Hero() {
         <MotionWrapper
             className="bg-gradient-to-l from-primary/15 via-primary/40 to-primary/80 p-6 lg:p-12 w-full mt-1"
             stagger={0.25}
-            trigger="always"
         >
             <div className="container grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
 
