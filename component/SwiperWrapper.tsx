@@ -15,7 +15,6 @@ import "swiper/css/pagination";
 import {NavigationOptions} from "swiper/types";
 import {FaAngleLeft} from "react-icons/fa";
 import Link from "next/link";
-import {motion} from "framer-motion";
 
 interface Props {
     title: string;
@@ -118,14 +117,7 @@ function SwiperWrapper({title, items}: Props) {
                 >
                     {items.map((product) => (
                         <SwiperSlide key={product.id}>
-                            <motion.div
-                                initial={{opacity: 0, x: -50, scale: 0.95}}
-                                whileInView={{opacity: 1, x: 0, scale: 1}}
-                                viewport={{once: true, amount: 0.3}}
-                                transition={{duration: 0.5, ease: "easeOut"}}
-                            >
-                                <ProductCard product={product}/>
-                            </motion.div>
+                            <ProductCard product={product}/>
                         </SwiperSlide>
                     ))}
                 </Swiper>

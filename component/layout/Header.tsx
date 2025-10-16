@@ -1,6 +1,6 @@
 "use client";
 
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {usePathname} from "next/navigation";
@@ -12,28 +12,34 @@ import {MdOutlineChevronLeft} from "react-icons/md";
 import {IoLogOutOutline} from "react-icons/io5";
 import {RiAdminLine} from "react-icons/ri";
 import {LiaAngleLeftSolid} from "react-icons/lia";
-
 import Overlay from "@/component/Overlay";
 import {HEADER_NAV, HEADER_USER_MENU} from "@/constant";
-import {CartItem, Category, User} from "@/types";
+import {Category, User} from "@/types";
 import {logout} from "@/redux/slices/authSlice";
 import toast from "react-hot-toast";
 import BasketCard from "@/component/card/BasketCard";
 import ThemeToggle from "@/component/ThemeToggle";
-import {useAppDispatch} from "@/redux/Hooks";
+import {useAppDispatch, useAppSelector} from "@/redux/Hooks";
+import Spinner from "@/component/Spinner";
+import {fetchCart} from "@/redux/slices/cartSlice";
 
 type MenuKey = "sidebar" | "userMenu" | "basket" | "categories";
 
 interface Props {
     categories: Category[];
     user: User | null;
-    cartItems: CartItem[] | [];
-    deleteId: number | null;
 }
 
-export default function Header({categories, user, cartItems, deleteId}: Props) {
+export default function Header({categories, user}: Props) {
     const pathname = usePathname();
     const dispatch = useAppDispatch();
+    const {cart, guestCart, loading} = useAppSelector((state) => state.cart);
+
+    useEffect(() => {
+        if (user) {
+            dispatch(fetchCart());
+        }
+    }, [dispatch, user]);
 
     const [open, setOpen] = useState<Record<MenuKey, boolean>>({
         sidebar: false,
@@ -50,6 +56,10 @@ export default function Header({categories, user, cartItems, deleteId}: Props) {
             categories: false,
         });
     }, [pathname]);
+
+    const cartItems = useMemo(() => {
+        return user ? cart?.items || [] : guestCart || [];
+    }, [user, cart, guestCart]);
 
     const {basketCount, basketTotal} = cartItems.reduce(
         (acc, item) => {
@@ -200,17 +210,23 @@ export default function Header({categories, user, cartItems, deleteId}: Props) {
                 <div className="flex items-center gap-x-3">
                     {/* Basket */}
                     <div className="relative">
-                        <button
-                            className={`header-button relative ${open.basket ? "z-50" : ""}`}
-                            onClick={() => toggle("basket", true)}
-                        >
-                            <BsBasket2/>
-                            <span
-                                className="absolute flex justify-center items-center size-4 -top-0.5 -right-0.5 text-[12px] bg-primary rounded-full text-white"
+                        {loading.fetch ? (
+                            <button className="header-button" disabled>
+                                <Spinner size={20}/>
+                            </button>
+                        ) : (
+                            <button
+                                className={`header-button relative ${open.basket ? "z-50" : ""}`}
+                                onClick={() => toggle("basket", true)}
                             >
+                                <BsBasket2/>
+                                <span
+                                    className="absolute flex justify-center items-center size-4 -top-0.5 -right-0.5 text-[12px] bg-primary rounded-full text-white"
+                                >
                                 {basketCount.toLocaleString("fa-IR")}
                                 </span>
-                        </button>
+                            </button>
+                        )}
 
                         {open.basket && (
                             <Overlay closeOverlay={() => toggle("basket", false)}/>
@@ -233,7 +249,7 @@ export default function Header({categories, user, cartItems, deleteId}: Props) {
                                                 key={idx}
                                                 item={item}
                                                 isGuest={!user}
-                                                loadingId={deleteId!}
+                                                loadingId={loading.deleteId!}
                                             />
                                         ))}
 

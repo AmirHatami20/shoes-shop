@@ -7,9 +7,9 @@ import ProductCartCard from "@/component/card/ProductCartCard";
 import {IoWalletOutline} from "react-icons/io5";
 import Spinner from "@/component/Spinner";
 import {useAppSelector} from "@/redux/Hooks";
+import {User} from "@/types";
 
-export default function CartLayout() {
-    const user = useAppSelector(state => state.auth.user);
+export default function CartLayout({user}: { user: User }) {
     const {cart, loading, guestCart} = useAppSelector(state => state.cart);
 
     const cartItems = user ? cart?.items || [] : guestCart;

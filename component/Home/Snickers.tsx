@@ -1,5 +1,3 @@
-'use client'
-
 import React from 'react';
 import SwiperWrapper from "@/component/SwiperWrapper";
 import {productService} from "@/services/productService";

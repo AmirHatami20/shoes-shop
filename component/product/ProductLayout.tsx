@@ -6,16 +6,15 @@ import ProductGallery from "@/component/product/ProductGallery";
 import Link from "next/link";
 import {FaAngleLeft} from "react-icons/fa";
 import ProductOptions from "@/component/product/ProductOptions";
-import {Product, ProductColor} from "@/types";
+import {Product, ProductColor, User} from "@/types";
 import {PRODUCT_SERVICES} from "@/constant";
-import {useAppSelector} from "@/redux/Hooks";
 
 interface Props {
     product: Product;
+    user: User;
 }
 
-export default function ProductLayout({product}: Props) {
-    const {user} = useAppSelector(state => state.auth);
+export default function ProductLayout({product,user}: Props) {
     const [selectedColor, setSelectedColor] = useState<ProductColor>(product.colors?.[0]);
 
     return (

@@ -16,6 +16,7 @@ interface Props {
 }
 
 export default function ProductOptions({product, selectedColor, onColorChange, user}: Props) {
+    console.log(user)
     const {colors, price, finalPrice, discount} = product;
     const [selectedSize, setSelectedSize] = useState<ProductSize>(colors[0]?.sizes[0]);
     const {loading} = useAppSelector(state => state.cart);
@@ -81,13 +82,13 @@ export default function ProductOptions({product, selectedColor, onColorChange, u
             </div>
             <div className="flex flex-col space-y-3 mt-3">
                 <span className="font-medium">انتخاب سایز:</span>
-                <div className="flex items-center gap-3">
+                <div className="flex flex-wrap items-center gap-3">
                     {selectedColor.sizes.map((size) => (
                         <button
                             key={size.id}
                             disabled={size.stock === 0}
                             onClick={() => setSelectedSize(size)}
-                            className={`w-11 h-11 rounded-full flex items-center justify-center text-sm transition-all 
+                            className={`w-11 h-11 rounded-full flex shrink-0 items-center justify-center text-sm transition-all 
                                 ${size.id === selectedSize.id ? "border-2 border-primary" : "border border-gray-400"}
                                 ${size.stock === 0 ? "opacity-40 cursor-not-allowed" : ""}`
                             }

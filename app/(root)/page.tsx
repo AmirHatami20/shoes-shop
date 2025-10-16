@@ -6,7 +6,7 @@ import {Snickers} from "@/component/Home/Snickers";
 import {MostDiscount} from "@/component/Home/MostDiscount";
 import Advertisement from "@/component/Home/Advertisement";
 
-export default function Home() {
+export default async function Home() {
     return (
         <>
             <Hero/>

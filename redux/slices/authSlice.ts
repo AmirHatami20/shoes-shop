@@ -38,18 +38,6 @@ export const register = createAsyncThunk<User, RegisterData, { rejectValue: stri
         }
     });
 
-// GET ME
-export const getMe = createAsyncThunk<User, void, { rejectValue: string }>(
-    "auth/getMe",
-    async (_, {rejectWithValue}) => {
-        try {
-            return await authService.getMe();
-        } catch (err: unknown) {
-            const error = err as ErrorResponse;
-            return rejectWithValue(error.response?.data?.error || "خطا در دریافت اطلاعات کاربر");
-        }
-    });
-
 // Logout
 export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
     "auth/logout",
@@ -62,7 +50,6 @@ export const logout = createAsyncThunk<void, void, { rejectValue: string }>(
         }
     }
 );
-
 
 const authSlice = createSlice({
     name: "auth",
@@ -96,20 +83,6 @@ const authSlice = createSlice({
             .addCase(register.rejected, (state, action) => {
                 state.loading = false;
                 state.error = action.payload || "خطا در ثبت نام";
-            })
-
-            // GET ME
-            .addCase(getMe.pending, (state) => {
-                state.loading = true;
-                state.error = null;
-            })
-            .addCase(getMe.fulfilled, (state, action: PayloadAction<User>) => {
-                state.loading = false;
-                state.user = action.payload;
-            })
-            .addCase(getMe.rejected, (state, action) => {
-                state.loading = false;
-                state.error = action.payload || "خطا در دریافت اطلاعات کاربر";
             })
 
             // LOGOUT

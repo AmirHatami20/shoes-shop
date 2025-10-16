@@ -1,5 +1,5 @@
 import {LoginData, RegisterData} from "@/types";
-import axiosClient from "@/lib/axios";
+import axiosClient, {API_URL} from "@/lib/axios";
 
 export const authService = {
     register: async (data: RegisterData) => {
@@ -12,10 +12,17 @@ export const authService = {
         return res.data;
     },
 
-    getMe: async () => {
-        const res = await axiosClient.get(`/auth/me`);
-        return res.data;
+    getMe: async (token: string) => {
+        try {
+            const res = await fetch(`${API_URL}/auth/me`, {
+                headers: {cookie: `access_token=${token}`}
+            });
+            return res.json();
+        } catch (err) {
+            console.error("Error fetching user in layout:", err);
+        }
     },
+
     logout: async () => {
         await axiosClient.post("/auth/logout");
     }

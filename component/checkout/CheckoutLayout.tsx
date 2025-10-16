@@ -1,26 +1,11 @@
-'use client'
-
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import {User} from "@/types";
-import {useRouter} from "next/navigation";
-import {authService} from "@/services/authService";
+import {redirect} from "next/navigation";
 
-export default function CheckoutLayout() {
-    const [user, setUser] = useState<User | null>(null);
-    const router = useRouter();
-
-    useEffect(() => {
-        authService.getMe()
-            .then(res => {
-                if (!res || res.role !== "admin") {
-                    router.push("/login");
-                } else {
-                    setUser(res);
-                }
-            })
-            .catch(() => router.push("/login"));
-    }, [router]);
-
+export default function CheckoutLayout({user}: { user: User }) {
+    if (!user || user.role !== "admin") {
+        redirect("/login");
+    }
     return (
         <div>
 
