@@ -33,7 +33,7 @@ export default function CartLayout() {
         {basketTotal: 0, basketDiscount: 0, payable: 0}
     );
 
-    if (loading.fetch) {
+    if (loading.fetch && user) {
         return (
             <div className="my-20 flex flex-col gap-y-3 items-center justify-center">
                 <Spinner size={60}/>
