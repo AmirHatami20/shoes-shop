@@ -83,6 +83,28 @@ export const updateCartItem = createAsyncThunk<{ id: number; qty: number }, { id
         }
     });
 
+// Merge guestCart to user cart
+export const mergeGuestCart = createAsyncThunk<void, void, { state: { cart: CartState } }>(
+    "cart/mergeGuestCart",
+    async (_, {getState, dispatch}) => {
+        const {guestCart} = getState().cart;
+        if (!guestCart.length) return;
+
+        for (const item of guestCart) {
+            await dispatch(addToCart({
+                productId: item.productId,
+                color: item.color,
+                size: item.size,
+                quantity: item.quantity
+            })).unwrap();
+        }
+
+        dispatch({type: "cart/clearGuestCart"});
+        localStorage.removeItem("guestCart");
+    }
+);
+
+
 // Slice
 const cartSlice = createSlice({
     name: "cart",
@@ -114,6 +136,10 @@ const cartSlice = createSlice({
                 item.quantity = qty;
                 localStorage.setItem("guestCart", JSON.stringify(state.guestCart));
             }
+        },
+        clearGuestCart(state) {
+            state.guestCart = [];
+            localStorage.removeItem("guestCart");
         }
     },
     extraReducers: (builder) => {
@@ -193,8 +219,9 @@ const cartSlice = createSlice({
             state.loading.updateId = null;
             state.error = action.payload || "خطا در بروزرسانی آیتم";
         });
+
     },
 });
 
-export const {addGuestCartItem, removeGuestCartItem, updateGuestCartItem} = cartSlice.actions;
+export const {addGuestCartItem, removeGuestCartItem, updateGuestCartItem, clearGuestCart} = cartSlice.actions;
 export default cartSlice.reducer;

@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector} from "@/redux/Hooks";
 import {login, register} from "@/redux/slices/authSlice";
 import {validateAuthForm} from "@/utils/validation";
 import {RegisterData} from "@/types";
+import {mergeGuestCart} from "@/redux/slices/cartSlice";
 
 interface AuthFormProps {
     mode: "login" | "register";
@@ -40,10 +41,18 @@ export default function AuthForm({mode, title}: AuthFormProps) {
             if (mode === "register") {
                 await dispatch(register(form)).unwrap();
                 toast.success("ثبت نام موفقیت‌آمیز بود");
+
+                // Merge guest cart
+                await dispatch(mergeGuestCart()).unwrap();
+
                 router.push("/");
             } else {
                 await dispatch(login({email: form.email, password: form.password})).unwrap();
                 toast.success("ورود موفقیت‌آمیز بود");
+
+                // Merge guest cart
+                await dispatch(mergeGuestCart()).unwrap();
+
                 router.push("/");
             }
         } catch (error) {
