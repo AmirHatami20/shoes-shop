@@ -15,7 +15,7 @@ interface CategoryTreeProps {
     cats: Category[];
     selectedParent: number | null;
     setSelectedParent: (id: number | null) => void;
-};
+}
 
 const CategoryTree = ({cats, selectedParent, setSelectedParent}: CategoryTreeProps) => {
     return (

@@ -4,7 +4,8 @@ import {Product} from "@/types";
 
 export default function BreadCrumb({product}: { product: Product }) {
     return (
-        <nav className="flex items-stretch w-full bg-background-secondary rounded-md px-3 my-5 shadow-sm overflow-x-hidden">
+        <nav
+            className="flex items-stretch w-full bg-background-secondary rounded-md px-3 my-5 shadow-sm overflow-x-hidden">
             <Link
                 href="/"
                 className="bread-crumb-item"
@@ -13,21 +14,21 @@ export default function BreadCrumb({product}: { product: Product }) {
             </Link>
             <Divider/>
             <Link
-                href={`/products?category`}
+                href={`/search/${product.category?.mainCategory.slug}`}
                 className="bread-crumb-item"
             >
                 {product.category?.mainCategory?.name}
             </Link>
             <Divider/>
             <Link
-                href={`/products?category`}
+                href={`/search/${product.category?.parentCategory.slug}`}
                 className="bread-crumb-item"
             >
                 {product.category?.parentCategory?.name}
             </Link>
             <Divider/>
             <Link
-                href={`/products?category`}
+                href={`/search/${product.category?.finalCategory.slug}`}
                 className="bread-crumb-item"
             >
                 {product.category?.finalCategory?.name}

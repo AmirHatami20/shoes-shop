@@ -18,7 +18,7 @@ const initialState: CartState = {
     cart: null,
     guestCart: typeof window !== "undefined" ? JSON.parse(localStorage.getItem("guestCart") || "[]") : [],
     loading: {
-        fetch: false,
+        fetch: true,
         create: false,
         updateId: null,
         deleteId: null,

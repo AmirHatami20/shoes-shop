@@ -1,8 +1,12 @@
-import React from 'react';
-import {User} from "@/types";
-import {redirect} from "next/navigation";
+'use client'
 
-export default function CheckoutLayout({user}: { user: User }) {
+import React from 'react';
+import {redirect} from "next/navigation";
+import {useApp} from "@/context/AppContext";
+
+export default function CheckoutLayout() {
+    const {user} = useApp()
+
     if (!user || user.role !== "admin") {
         redirect("/login");
     }

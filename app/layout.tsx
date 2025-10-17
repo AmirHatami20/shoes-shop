@@ -1,9 +1,15 @@
+// app/layout.tsx
 import type {Metadata} from "next";
 import "./globals.css";
 import {ReactNode} from "react";
 import {ReduxProvider} from "@/component/ReduxProvider";
 import {Vazirmatn} from "next/font/google";
 import {Toaster} from "react-hot-toast";
+import {AppProvider} from "@/context/AppContext"; // Context
+import {cookies} from "next/headers";
+import {verifyToken} from "@/lib/auth";
+import {authService} from "@/services/authService";
+import {categoryService} from "@/services/categoryService";
 
 export const metadata: Metadata = {
     title: "فروشگاه کفش",
@@ -16,7 +22,19 @@ const vazir = Vazirmatn({
     variable: "--font-vazir",
 });
 
-export default function RootLayout({children}: { children: ReactNode }) {
+export default async function RootLayout({children}: { children: ReactNode }) {
+    // --- Fetch user server-side ---
+    const token = (await cookies()).get("access_token")?.value;
+    const userId = token ? verifyToken(token)?.id : null;
+
+    let user = null;
+    if (userId) {
+        user = await authService.getMe(token as string);
+    }
+
+    // --- Fetch categories server-side ---
+    const categories = await categoryService.getAll();
+
     return (
         <html lang="fa" dir="rtl" suppressHydrationWarning>
         <head>
@@ -37,12 +55,13 @@ export default function RootLayout({children}: { children: ReactNode }) {
                 }}
             />
         </head>
-        <body
-            className={`${vazir.className} bg-background text-text transition-colors duration-300`}
-        >
+        <body className={`${vazir.className} bg-background text-text transition-colors duration-300`}>
+        {/* Redux + Context */}
         <ReduxProvider>
-            <Toaster position="top-center" reverseOrder={false}/>
-            {children}
+            <AppProvider user={user} categories={categories}>
+                <Toaster position="top-center" reverseOrder={false}/>
+                {children}
+            </AppProvider>
         </ReduxProvider>
         </body>
         </html>

@@ -33,7 +33,7 @@ export default function SearchGrid(
         );
     }
 
-    if (products.length === 0) {
+    if (!isLoadingProducts && products.length === 0) {
         return (
             <div className="flex flex-col items-center justify-center mt-20 text-text-muted">
                 <FiBox size={48} className="mb-3"/>
@@ -44,6 +44,7 @@ export default function SearchGrid(
             </div>
         );
     }
+
 
     return (
         <>

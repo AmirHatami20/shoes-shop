@@ -12,7 +12,6 @@ import ProductCard from "@/component/admin/card/ProductCard";
 export default function Page() {
     const dispatch = useAppDispatch();
     const {products, loading} = useAppSelector(state => state.product);
-    console.log(products)
 
     useEffect(() => {
         dispatch(fetchProducts());

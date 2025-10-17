@@ -34,7 +34,7 @@ const initialState: ProductState = {
     pagination: {total: 0, page: 1, limit: 10, totalPages: 0},
     selectedProduct: null,
     loading: {
-        fetchAll: false,
+        fetchAll: true,
         fetchOne: false,
         create: false,
         update: false,

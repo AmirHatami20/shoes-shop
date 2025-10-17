@@ -14,23 +14,20 @@ import {RiAdminLine} from "react-icons/ri";
 import {LiaAngleLeftSolid} from "react-icons/lia";
 import Overlay from "@/component/Overlay";
 import {HEADER_NAV, HEADER_USER_MENU} from "@/constant";
-import {Category, User} from "@/types";
 import {logout} from "@/redux/slices/authSlice";
 import toast from "react-hot-toast";
 import BasketCard from "@/component/card/BasketCard";
 import ThemeToggle from "@/component/ThemeToggle";
 import {useAppDispatch, useAppSelector} from "@/redux/Hooks";
-import Spinner from "@/component/Spinner";
 import {fetchCart} from "@/redux/slices/cartSlice";
+import {useApp} from "@/context/AppContext";
 
 type MenuKey = "sidebar" | "userMenu" | "basket" | "categories";
 
-interface Props {
-    categories: Category[];
-    user: User | null;
-}
 
-export default function Header({categories, user}: Props) {
+export default function Header() {
+    const {user, categories} = useApp()
+
     const pathname = usePathname();
     const dispatch = useAppDispatch();
     const {cart, guestCart, loading} = useAppSelector((state) => state.cart);
@@ -210,10 +207,10 @@ export default function Header({categories, user}: Props) {
                 <div className="flex items-center gap-x-3">
                     {/* Basket */}
                     <div className="relative">
-                        {loading.fetch ? (
-                            <button className="header-button" disabled>
-                                <Spinner size={20}/>
-                            </button>
+                        {user && loading.fetch ? (
+                            <button
+                                className=" flex items-center justify-center w-12 h-12 my-2 rounded-full bg-background text-2xl border border-border animate-pulse transition-all duration-30"
+                            />
                         ) : (
                             <button
                                 className={`header-button relative ${open.basket ? "z-50" : ""}`}
