@@ -1,7 +1,7 @@
 'use client';
 
 import React, {useEffect, useState} from 'react';
-import FormField from "@/component/admin/Form/FormField";
+import FormField from "@/component/Form/FormField";
 import {Category, Product} from "@/types";
 import {useAppDispatch, useAppSelector} from "@/redux/Hooks";
 import {fetchCategories} from "@/redux/slices/categorySlice";

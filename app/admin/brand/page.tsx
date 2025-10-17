@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 import { useAppDispatch, useAppSelector } from "@/redux/Hooks";
 import { BrandPayload } from "@/types";
 import Overlay from "@/component/Overlay";
-import FormField from "@/component/admin/Form/FormField";
+import FormField from "@/component/Form/FormField";
 import Spinner from "@/component/Spinner";
 import { createBrand, deleteBrand, fetchBrands } from "@/redux/slices/brandSlice";
 

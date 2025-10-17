@@ -1,7 +1,7 @@
 'use client';
 
 import {useParams} from 'next/navigation';
-import ProductForm from '@/component/admin/Form/ProductForm';
+import ProductForm from '@/component/admin/ProductForm';
 import Link from "next/link";
 import {LuMoveRight} from "react-icons/lu";
 import React from "react";

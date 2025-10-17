@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductForm from "@/component/admin/Form/ProductForm";
+import ProductForm from "@/component/admin/ProductForm";
 import Link from "next/link";
 import {LuMoveRight} from "react-icons/lu";
 

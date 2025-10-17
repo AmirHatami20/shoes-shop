@@ -165,7 +165,7 @@ export interface CreateShippingAddress {
     alley: string;
     buildingNumber: number;
     apartment: number;
-    postalCode?: string;
+    postalCode: string;
 }
 
 export interface OrderItem {

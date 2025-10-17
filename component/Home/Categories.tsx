@@ -21,7 +21,7 @@ export default function Categories() {
                 >
                     <Link
                         href={`/search/${cat.href}`}
-                        className="flex rounded-md bg-background-secondary border border-border m-3 hover:scale-105 transition-transform overflow-hidden"
+                        className="flex rounded-md bg-background-secondary border border-border m-1.5 md:m-3 hover:scale-105 transition-transform overflow-hidden"
                     >
                         <div
                             className="w-1/3 sm:w-[40%] flex flex-col justify-center items-center bg-primary gap-2 px-2 py-3 text-center"

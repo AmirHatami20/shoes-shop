@@ -8,7 +8,7 @@ import {useAppDispatch, useAppSelector} from "@/redux/Hooks";
 import {createCategory, deleteCategory, fetchCategories} from "@/redux/slices/categorySlice";
 import {Category, CategoryPayload} from "@/types";
 import Overlay from "@/component/Overlay";
-import FormField from "@/component/admin/Form/FormField";
+import FormField from "@/component/Form/FormField";
 import Spinner from "@/component/Spinner";
 
 interface CategoryTreeProps {
