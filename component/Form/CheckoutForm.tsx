@@ -136,7 +136,7 @@ export default function CheckoutForm({form, setForm, errors, onChange,}: Props) 
                         {provinces.map((p) => (
                             <div
                                 key={p.id}
-                                className="p-2 cursor-pointer"
+                                className="p-2 hover:bg-primary/20 cursor-pointer"
                                 onClick={() => handleSelectProvince(p.name)}
                             >
                                 {p.name}
@@ -170,7 +170,7 @@ export default function CheckoutForm({form, setForm, errors, onChange,}: Props) 
                         {cities.map((c) => (
                             <div
                                 key={c.id}
-                                className="p-2 cursor-pointer"
+                                className="p-2  hover:bg-primary/20 cursor-pointer"
                                 onClick={() => handleSelectCity(c.name)}
                             >
                                 {c.name}
