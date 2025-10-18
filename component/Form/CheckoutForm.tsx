@@ -170,7 +170,7 @@ export default function CheckoutForm({form, setForm, errors, onChange,}: Props) 
                         {cities.map((c) => (
                             <div
                                 key={c.id}
-                                className="p-2 hover:bg-gray-200 cursor-pointer"
+                                className="p-2 cursor-pointer"
                                 onClick={() => handleSelectCity(c.name)}
                             >
                                 {c.name}
