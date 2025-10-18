@@ -38,7 +38,7 @@ export default function Page() {
         return (
             <div className="my-20 flex flex-col gap-y-3 items-center justify-center">
                 <Spinner size={60}/>
-                <span>در حال بارگیری..</span>
+                <span className="font-medium animate-pulse">در حال بارگیری..</span>
             </div>
         );
     }

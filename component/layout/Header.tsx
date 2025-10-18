@@ -382,14 +382,11 @@ export default function Header() {
                                 {user.email}
                             </span>
                         </div>
-                        <Link href="/" className="absolute left-2 text-lg text-text-muted my-auto">
-                            <LiaAngleLeftSolid/>
-                        </Link>
                     </div>
                 ) : (
                     <Link
                         href="/login"
-                        className="bg-red-200 flex items-center justify-center py-4 w-full text-lg shadowed-text"
+                        className="bg-red-200 text-black flex items-center justify-center py-4 w-full text-lg shadowed-text"
                     >
                         ورود | ثبت نام
                     </Link>

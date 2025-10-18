@@ -129,7 +129,7 @@ export default function CheckoutForm({form, setForm, errors, onChange,}: Props) 
                         {!provinceOpen ? <FaAngleDown size={15}/> : <FaAngleUp size={15}/>}
                     </div>
                     <div
-                        className={`absolute left-0 right-0 top-full border border-border rounded-xl shadow max-h-52 overflow-auto z-50 ${
+                        className={`absolute left-0 right-0 top-full border border-border rounded-xl bg-background-secondary shadow max-h-52 overflow-auto z-50 ${
                             provinceOpen ? "block" : "hidden"
                         }`}
                     >
@@ -163,7 +163,7 @@ export default function CheckoutForm({form, setForm, errors, onChange,}: Props) 
                         {!cityOpen ? <FaAngleDown size={15}/> : <FaAngleUp size={15}/>}
                     </div>
                     <div
-                        className={`absolute left-0 right-0 top-full border border-border rounded-xl shadow max-h-52 overflow-auto z-50 ${
+                        className={`absolute left-0 right-0 top-full border border-border rounded-xl bg-background-secondary shadow max-h-52 overflow-auto z-50 ${
                             cityOpen ? "block" : "hidden"
                         }`}
                     >
